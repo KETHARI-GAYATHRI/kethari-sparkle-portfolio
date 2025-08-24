@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
+  base:'kethari-sparkle-portfolio',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
