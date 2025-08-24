@@ -2,41 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Kethari Gayathri Portfolio Design System - Vibrant Tech Aesthetic */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base Colors */
+    --background: 220 26% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card & Surface Colors */
+    --card: 220 26% 8%;
+    --card-foreground: 210 40% 98%;
+    --card-glass: 220 26% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover Colors */
+    --popover: 220 26% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors - Vibrant Tech Palette */
+    --primary: 200 100% 60%;
+    --primary-foreground: 220 26% 6%;
+    --primary-glow: 200 100% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 280 100% 65%;
+    --secondary-foreground: 220 26% 6%;
+    --secondary-glow: 280 100% 75%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 320 100% 70%;
+    --accent-foreground: 220 26% 6%;
+    --accent-glow: 320 100% 80%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Tertiary Colors */
+    --tertiary: 45 100% 65%;
+    --tertiary-foreground: 220 26% 6%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Status Colors */
+    --muted: 215 25% 27%;
+    --muted-foreground: 217 10% 64%;
+
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
 
-    --radius: 0.5rem;
+    /* Borders & Inputs */
+    --border: 215 25% 20%;
+    --input: 215 25% 18%;
+    --ring: 200 100% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--tertiary)));
+    --gradient-surface: linear-gradient(135deg, hsl(var(--card)), hsl(var(--card-glass)));
+
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-glow-secondary: 0 0 40px hsl(var(--secondary) / 0.3);
+    --shadow-glow-accent: 0 0 40px hsl(var(--accent) / 0.3);
+    --shadow-elegant: 0 20px 40px hsl(220 26% 4% / 0.5);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +127,195 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+}
+
+@layer components {
+  /* Animated Text Effects */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid hsl(var(--primary));
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  .letter-animate {
+    display: inline-block;
+    animation: letterDrop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+  }
+
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glass Effect */
+  .glass {
+    background: hsl(var(--card-glass) / 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.2);
+  }
+
+  /* Hover Effects */
+  .hover-float {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-float:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Skill Cards */
+  .skill-card {
+    background: var(--gradient-surface);
+    border: 1px solid hsl(var(--border) / 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  /* Ballpit Animation */
+  .ballpit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .ball {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .ball:nth-child(1) { animation-delay: 0s; }
+  .ball:nth-child(2) { animation-delay: 1s; }
+  .ball:nth-child(3) { animation-delay: 2s; }
+  .ball:nth-child(4) { animation-delay: 3s; }
+  .ball:nth-child(5) { animation-delay: 4s; }
+}
+
+@layer utilities {
+  /* Animation Keyframes */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: hsl(var(--primary)) }
+  }
+
+  @keyframes letterDrop {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px) rotateX(90deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(-10px) translateX(-10px);
+    }
+    75% {
+      transform: translateY(-30px) translateX(5px);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Animation Classes */
+  .animate-letter-drop {
+    animation: letterDrop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
   }
 }
