@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { TextType } from './TextType';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
-
+import profile from '@/assets/profile.jpg';
 interface HeroProps {
   onNavigate: (section: string) => void;
 }
@@ -11,19 +11,19 @@ export const Hero = ({ onNavigate }: HeroProps) => {
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
 
-  const titleTexts = [
+  const titleTexts = useMemo(() => [
     "Kethari Gayathri",
-    "ECE Student", 
+    "ECE Student",
     "Application Developer",
-    "Tech Enthusiast"
-  ];
+    "Tech Enthusiast",
+  ], []);
 
-  const subtitleTexts = [
+  const subtitleTexts = useMemo(() => [
     "Electronics & Communication Engineering Student",
     "Java Developer & VLSI Designer",
     "Passionate About Innovation",
-    "Ready to Make an Impact"
-  ];
+    "Ready to Make an Impact",
+  ], []);
 
   useEffect(() => {
     const subtitleTimer = setTimeout(() => setShowSubtitle(true), 3000);
@@ -42,48 +42,52 @@ export const Hero = ({ onNavigate }: HeroProps) => {
         <div className="mb-8 animate-fade-in-up">
           <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-primary/30 hover-glow transition-all duration-500 hover:border-primary/60 hover:scale-105">
             <img 
-              src="/lovable-uploads/c8e34eb6-2530-4350-a3e8-0a265d45cd2b.png" 
+              src={profile} 
               alt="Kethari Gayathri - Electronics & Communication Engineering Student" 
               className="w-full h-full object-cover"
             />
           </div>
         </div>
 
-        {/* Animated Name with Typewriter Effect */}
         <h1 className="text-5xl md:text-7xl font-bold mb-6 min-h-[120px] flex items-center justify-center">
-          <TextType
-            text={titleTexts}
-            className="gradient-text glow-text"
-            typingSpeed={100}
-            pauseDuration={2000}
-            deletingSpeed={60}
-            loop={true}
-            showCursor={true}
-            cursorCharacter="|"
-            cursorClassName="text-primary animate-pulse"
-            variableSpeed={{min: 80, max: 120}}
-            onSentenceComplete={(sentence, index) => {
-              if (index === 0 && !showSubtitle) {
-                setShowSubtitle(true);
-              }
-            }}
-          />
-        </h1>
+  <TextType
+    text={titleTexts}
+    className="gradient-text glow-text"
+    // Professional, human-like typing settings
+    typingSpeed={90}
+    deletingSpeed={65}
+    pauseDuration={1800}
+    loop={true}
+    // Let TextType manage cursor blinking for perfect sync; remove extra animate-blink
+    showCursor={true}
+    cursorCharacter="|"
+    cursorBlinkDuration={0.45}
+    cursorClassName="text-primary"
+    // mild natural variation
+    variableSpeed={{ min: 75, max: 110 }}
+    onSentenceComplete={(sentence, index) => {
+      if (index === 0 && !showSubtitle) {
+        setShowSubtitle(true);
+      }
+    }}
+  />
+</h1>
 
-        {/* Animated Subtitle */}
-        {showSubtitle && (
-          <div className="text-xl md:text-2xl text-muted-foreground mb-8 min-h-[80px] flex items-center justify-center animate-fade-in-up">
-            <TextType 
-              text={subtitleTexts}
-              typingSpeed={60}
-              pauseDuration={3000}
-              deletingSpeed={40}
-              loop={true}
-              showCursor={false}
-              className="text-secondary"
-            />
-          </div>
-        )}
+{/* Animated Subtitle */}
+{showSubtitle && (
+  <div className="text-xl md:text-2xl text-muted-foreground mb-8 min-h-[80px] flex items-center justify-center animate-fade-in-up">
+    <TextType
+      text={subtitleTexts}
+      typingSpeed={85}
+      deletingSpeed={60}
+      pauseDuration={2600}
+      loop={true}
+      showCursor={false}
+      className="text-secondary"
+    />
+  </div>
+)}
+
 
         {/* Description */}
         {showButtons && (
