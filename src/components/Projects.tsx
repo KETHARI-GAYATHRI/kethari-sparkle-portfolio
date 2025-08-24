@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Database, Antenna, BookOpen } from 'lucide-react';
+import projectsBg from '@/assets/projects-bg.jpg';
 
 export const Projects = () => {
   const projects = [
@@ -34,8 +35,16 @@ export const Projects = () => {
   ];
 
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <section 
+      className="py-20 px-4 relative"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url(${projectsBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Projects</h2>

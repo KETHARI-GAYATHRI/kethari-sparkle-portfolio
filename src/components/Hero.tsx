@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { LetterAnimation, AnimatedText } from './AnimatedText';
+import { TextType } from './TextType';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 
 interface HeroProps {
@@ -11,9 +11,23 @@ export const Hero = ({ onNavigate }: HeroProps) => {
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
 
+  const titleTexts = [
+    "Kethari Gayathri",
+    "ECE Student", 
+    "Application Developer",
+    "Tech Enthusiast"
+  ];
+
+  const subtitleTexts = [
+    "Electronics & Communication Engineering Student",
+    "Java Developer & VLSI Designer",
+    "Passionate About Innovation",
+    "Ready to Make an Impact"
+  ];
+
   useEffect(() => {
-    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 2000);
-    const buttonsTimer = setTimeout(() => setShowButtons(true), 3500);
+    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 3000);
+    const buttonsTimer = setTimeout(() => setShowButtons(true), 5000);
 
     return () => {
       clearTimeout(subtitleTimer);
@@ -26,30 +40,47 @@ export const Hero = ({ onNavigate }: HeroProps) => {
       <div className="text-center max-w-4xl mx-auto">
         {/* Profile Image */}
         <div className="mb-8 animate-fade-in-up">
-          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-primary/30 hover-glow transition-all duration-500 hover:border-primary/60">
+          <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-primary/30 hover-glow transition-all duration-500 hover:border-primary/60 hover:scale-105">
             <img 
               src="/lovable-uploads/c8e34eb6-2530-4350-a3e8-0a265d45cd2b.png" 
-              alt="Kethari Gayathri" 
+              alt="Kethari Gayathri - Electronics & Communication Engineering Student" 
               className="w-full h-full object-cover"
             />
           </div>
         </div>
 
-        {/* Animated Name */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6">
-          <LetterAnimation 
-            text="Kethari Gayathri" 
+        {/* Animated Name with Typewriter Effect */}
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 min-h-[120px] flex items-center justify-center">
+          <TextType
+            text={titleTexts}
             className="gradient-text glow-text"
-            stagger={150}
+            typingSpeed={100}
+            pauseDuration={2000}
+            deletingSpeed={60}
+            loop={true}
+            showCursor={true}
+            cursorCharacter="|"
+            cursorClassName="text-primary animate-pulse"
+            variableSpeed={{min: 80, max: 120}}
+            onSentenceComplete={(sentence, index) => {
+              if (index === 0 && !showSubtitle) {
+                setShowSubtitle(true);
+              }
+            }}
           />
         </h1>
 
         {/* Animated Subtitle */}
         {showSubtitle && (
-          <div className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up">
-            <AnimatedText 
-              text="Electronics & Communication Engineering Student | Application Developer | Tech Enthusiast"
-              delay={30}
+          <div className="text-xl md:text-2xl text-muted-foreground mb-8 min-h-[80px] flex items-center justify-center animate-fade-in-up">
+            <TextType 
+              text={subtitleTexts}
+              typingSpeed={60}
+              pauseDuration={3000}
+              deletingSpeed={40}
+              loop={true}
+              showCursor={false}
+              className="text-secondary"
             />
           </div>
         )}
@@ -91,6 +122,7 @@ export const Hero = ({ onNavigate }: HeroProps) => {
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary-glow transition-all duration-300 hover-float hover-glow"
+              aria-label="Connect with Kethari Gayathri on LinkedIn"
             >
               <Linkedin size={24} />
             </a>
@@ -99,12 +131,14 @@ export const Hero = ({ onNavigate }: HeroProps) => {
               target="_blank" 
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary-glow transition-all duration-300 hover-float hover-glow"
+              aria-label="View Kethari Gayathri's GitHub profile"
             >
               <Github size={24} />
             </a>
             <a 
               href="mailto:ketharigayathri@gmail.com"
               className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary-glow transition-all duration-300 hover-float hover-glow"
+              aria-label="Send email to Kethari Gayathri"
             >
               <Mail size={24} />
             </a>

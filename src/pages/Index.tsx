@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BallpitBackground } from '@/components/BallpitBackground';
+import { BallpitCanvas } from '@/components/BallpitCanvas';
 import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
@@ -46,8 +46,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      {/* Animated Background */}
-      <BallpitBackground />
+      {/* Advanced 3D Ballpit Background */}
+      <BallpitCanvas 
+        count={60}
+        gravity={0.008}
+        friction={0.998}
+        wallBounce={0.92}
+        followCursor={true}
+        colors={[0x00d4ff, 0x8b5cf6, 0xf59e0b, 0xef4444, 0x10b981, 0xff6b9d]}
+        ambientIntensity={0.3}
+        lightIntensity={0.8}
+        minSize={0.08}
+        maxSize={0.25}
+        maxVelocity={0.08}
+      />
       
       {/* Navigation */}
       <Navigation activeSection={activeSection} onSectionChange={scrollToSection} />

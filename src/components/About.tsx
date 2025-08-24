@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { GraduationCap, Award, MapPin } from 'lucide-react';
+import aboutBg from '@/assets/about-bg.jpg';
 
 export const About = () => {
   const education = [
@@ -38,8 +39,16 @@ export const About = () => {
   ];
 
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <section 
+      className="py-20 px-4 relative"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${aboutBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">About Me</h2>
